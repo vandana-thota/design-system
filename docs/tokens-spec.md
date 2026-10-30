@@ -246,11 +246,11 @@ Contrast (checked)
 | text.secondary on bg.surface-secondary | 4.8 | 5.7 | 4.5 |
 | text.secondary on bg.surface-hover | 5.0 | 6.0 | 4.5 |
 | text.secondary on bg.surface-selected | 4.9 | 5.6 | 4.5 |
-| text.link on bg.surface | 5.6 | 6.0 | 4.5 |
+| text.link on bg.surface | 5.6 | 5.9 | 4.5 |
 | text.on-accent on accent.default | 5.6 | 6.9 | 4.5 |
 | text.on-accent on accent.hover | 7.3 | 8.8 | 4.5 |
 | text.on-accent on accent.pressed | 9.7 | 5.6 | 4.5 |
-| accent.subtle-text on accent.subtle | 6.4 | 8.1 | 4.5 |
+| accent.subtle-text on accent.subtle | 6.3 | 8.1 | 4.5 |
 | border.focus on bg.canvas | 5.1 | 6.9 | 3.0 |
 | status.success.text on .bg | 5.2 | 8.0 | 4.5 |
 | status.warning.text on .bg | 5.6 | 9.1 | 4.5 |
