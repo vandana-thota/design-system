@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { font: 12px/1.5 system-ui, sans-serif; margin: 16px; color: #1b1c20; }
+    button { font: inherit; padding: 6px 12px; margin-top: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid #ddd; }
+    h2 { font-size: 13px; margin: 16px 0 4px; }
+    ul { margin: 4px 0; padding-left: 18px; }
+    .error { color: #b42318; }
+    #out { display: none; }
+  </style>
+</head>
+<body>
+  <p>Choose <b>tokens/tokens.json</b>. The file is read here in the plugin and never leaves your computer.</p>
+  <input id="file" type="file" accept=".json,application/json" />
+  <br />
+  <button id="run" disabled>Create / update variables</button>
+  <p id="status"></p>
+  <div id="out"></div>
+
+  <script>
+    var text = null;
+    var fileInput = document.getElementById('file');
+    var runButton = document.getElementById('run');
+    var statusEl = document.getElementById('status');
+    var out = document.getElementById('out');
+
+    function esc(s) {
+      return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; });
+    }
+
+    fileInput.onchange = function () {
+      var f = fileInput.files[0];
+      if (!f) return;
+      var reader = new FileReader();
+      reader.onload = function () { text = reader.result; runButton.disabled = false; statusEl.textContent = 'Loaded ' + f.name; };
+      reader.readAsText(f);
+    };
+
+    runButton.onclick = function () {
+      runButton.disabled = true;
+      statusEl.textContent = 'Working...';
+      parent.postMessage({ pluginMessage: { type: 'sync', tokens: text } }, '*');
+    };
+
+    onmessage = function (event) {
+      var msg = event.data.pluginMessage;
+      if (!msg) return;
+      runButton.disabled = false;
+      if (msg.type === 'failed') {
+        statusEl.innerHTML = '<span class="error">Failed: ' + esc(msg.message) + '</span>';
+        return;
+      }
+      var r = msg.result;
+      statusEl.textContent = r.approach === 'modes'
+        ? 'Semantic uses one collection with Light and Dark modes.'
+        : 'Figma refused a second mode (' + r.fallbackReason + '). Semantic uses two collections: "Semantic / Light" and "Semantic / Dark".';
+      var html = '<table><tr><th>Collection</th><th>Created</th><th>Updated</th><th>Unchanged</th><th>Skipped</th><th>Errors</th></tr>';
+      Object.keys(r.stats).forEach(function (k) {
+        var s = r.stats[k];
+        html += '<tr><td>' + esc(k) + '</td><td>' + s.created + '</td><td>' + s.updated + '</td><td>' + s.unchanged + '</td><td>' + s.skipped + '</td><td>' + s.errors + '</td></tr>';
+      });
+      html += '</table>';
+      if (r.errors.length) {
+        html += '<h2 class="error">Errors</h2><ul>' + r.errors.map(function (e) { return '<li class="error">' + esc(e.token) + ': ' + esc(e.message) + '</li>'; }).join('') + '</ul>';
+      }
+      html += '<h2>Skipped (' + r.skipped.length + ')</h2><ul>' + r.skipped.map(function (s) { return '<li>' + esc(s.token) + ': ' + esc(s.reason) + '</li>'; }).join('') + '</ul>';
+      if (r.notes.length) html += '<h2>Notes</h2><ul>' + r.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>';
+      out.innerHTML = html;
+      out.style.display = 'block';
+    };
+  </script>
+</body>
+</html>
