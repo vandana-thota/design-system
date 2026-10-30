@@ -29,6 +29,7 @@
   --color-status-danger-bg: var(--prim-color-red-50);
   --color-status-danger-text: var(--prim-color-red-700);
   --color-status-danger-fill: var(--prim-color-red-600);
+  --color-status-danger-fill-pressed: var(--prim-color-red-800);
   --color-status-danger-border: var(--prim-color-red-700);
   --color-status-info-bg: var(--prim-color-cobalt-50);
   --color-status-info-text: var(--prim-color-cobalt-600);
@@ -81,6 +82,8 @@
   --motion-exit-easing: var(--prim-motion-ease-exit);
   --motion-emphasis-duration: var(--prim-motion-duration-320);
   --motion-emphasis-easing: var(--prim-motion-ease-standard);
+  --motion-spinner-duration: var(--prim-motion-duration-800);
+  --motion-spinner-easing: var(--prim-motion-ease-linear);
   --elevation-flat-surface: var(--color-bg-surface);
   --elevation-flat-shadow: none;
   --elevation-raised-surface: var(--color-bg-surface);
@@ -89,6 +92,9 @@
   --elevation-overlay-shadow: var(--prim-shadow-md);
   --elevation-modal-surface: var(--color-bg-surface);
   --elevation-modal-shadow: var(--prim-shadow-lg);
+  --size-icon-sm: var(--prim-size-icon-sm);
+  --size-icon-md: var(--prim-size-icon-md);
+  --size-icon-lg: var(--prim-size-icon-lg);
 }
 
 [data-theme="dark"] {
@@ -119,6 +125,7 @@
   --color-status-danger-bg: var(--prim-color-red-950);
   --color-status-danger-text: var(--prim-color-red-300);
   --color-status-danger-fill: var(--prim-color-red-350);
+  --color-status-danger-fill-pressed: var(--prim-color-red-400);
   --color-status-danger-border: var(--prim-color-red-300);
   --color-status-info-bg: var(--prim-color-cobalt-900);
   --color-status-info-text: var(--prim-color-cobalt-200);

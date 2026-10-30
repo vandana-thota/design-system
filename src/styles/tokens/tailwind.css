@@ -21,6 +21,7 @@
   --color-status-danger-bg: var(--prim-color-red-50);
   --color-status-danger-text: var(--prim-color-red-700);
   --color-status-danger-fill: var(--prim-color-red-600);
+  --color-status-danger-fill-pressed: var(--prim-color-red-800);
   --color-status-danger-border: var(--prim-color-red-700);
   --color-status-info-bg: var(--prim-color-cobalt-50);
   --color-status-info-text: var(--prim-color-cobalt-600);
@@ -58,6 +59,9 @@
   --spacing-section-sm: var(--space-section-sm);
   --spacing-section-md: var(--space-section-md);
   --spacing-section-lg: var(--space-section-lg);
+  --spacing-icon-sm: var(--size-icon-sm);
+  --spacing-icon-md: var(--size-icon-md);
+  --spacing-icon-lg: var(--size-icon-lg);
   --radius-chip: var(--prim-radius-050);
   --radius-control: var(--prim-radius-075);
   --radius-card: var(--prim-radius-150);

@@ -125,6 +125,8 @@ const formats = {
       .map((t) => `  ${varName(t.path)}: ${toCss(original(t))};`);
 
     for (const t of sem('space')) lines.push(`  --spacing-${kebab(t.path.slice(2))}: var(${varName(t.path)});`);
+    // Icon sizes are exposed through the spacing namespace so `size-icon-sm` etc. exist as classes.
+    for (const t of sem('size')) lines.push(`  --spacing-${kebab(t.path.slice(2))}: var(${varName(t.path)});`);
     // Radius aliases point at the primitive, since the real variable has the same name.
     for (const t of sem('radius')) lines.push(`  --radius-${kebab(t.path.slice(2))}: ${toCss(original(t))};`);
     for (const t of sem('elevation').filter((t) => t.path[2] !== 'flat')) {

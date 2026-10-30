@@ -88,8 +88,10 @@ Status
 | red-50 | #FCEAE8 |
 | red-300 | #FF8C82 |
 | red-350 | #FF7A70 |
+| red-400 | #F2665C |
 | red-600 | #C2302A |
 | red-700 | #B42318 |
+| red-800 | #912018 |
 | red-950 | #331917 |
 
 ### 1.2 Spacing (4px grid, 8px base unit)
@@ -167,9 +169,11 @@ Name = value relative to the 8px base (100 = 8px).
 | duration-120 | 120ms |
 | duration-200 | 200ms |
 | duration-320 | 320ms |
+| duration-800 | 800ms |
 | ease-standard | cubic-bezier(0.2, 0, 0, 1) |
 | ease-enter | cubic-bezier(0, 0, 0, 1) |
 | ease-exit | cubic-bezier(0.3, 0, 1, 1) |
+| ease-linear | cubic-bezier(0, 0, 1, 1) |
 
 ### 1.8 Shadow
 
@@ -233,6 +237,7 @@ Switches with `data-theme="light"` or `data-theme="dark"` on the root element. L
 | color.status.danger.bg | red-50 | red-950 | |
 | color.status.danger.text | red-700 | red-300 | Error messages |
 | color.status.danger.fill | red-600 | red-350 | Destructive buttons |
+| color.status.danger.fill-pressed | red-800 | red-400 | Destructive button pressed |
 | color.status.danger.border | red-700 | red-300 | Input error border |
 | color.status.info.bg | cobalt-50 | cobalt-900 | |
 | color.status.info.text | cobalt-600 | cobalt-200 | |
@@ -256,6 +261,8 @@ Contrast (checked)
 | status.warning.text on .bg | 5.6 | 9.1 | 4.5 |
 | status.danger.text on .bg | 5.7 | 7.2 | 4.5 |
 | text.on-danger on status.danger.fill | 5.6 | 7.4 | 4.5 |
+| text.on-danger on status.danger.border (danger button hover) | 6.6 | 8.4 | 4.5 |
+| text.on-danger on status.danger.fill-pressed | 8.7 | 6.1 | 4.5 |
 
 ### 2.2 Focus
 
@@ -356,6 +363,7 @@ Rules
 | motion-enter | duration-200 | ease-enter | Menus, toasts, popovers appearing |
 | motion-exit | duration-120 | ease-exit | Elements leaving |
 | motion-emphasis | duration-320 | ease-standard | Dialogs, drawers, layout changes |
+| motion-spinner | duration-800 | ease-linear | Loading spinner rotation. Under reduced motion the spinner is a static ring. |
 
 Animate opacity and transform only. When `prefers-reduced-motion: reduce` is set, all durations become duration-0 and movement is replaced with a fade or no animation.
 
@@ -368,6 +376,16 @@ Animate opacity and transform only. When `prefers-reduced-motion: reduce` is set
 | elevation-overlay | bg.surface | shadow-md | Menus, popovers, toasts |
 | elevation-modal | bg.surface | shadow-lg | Dialogs |
 
+### 2.10 Icon size roles
+
+| Token | Value | Use |
+|---|---|---|
+| size-icon-sm | size-icon-sm (16) | Inline icons, spinner in small buttons |
+| size-icon-md | size-icon-md (20) | Default icons, spinner in medium and large buttons |
+| size-icon-lg | size-icon-lg (24) | Standalone icons |
+
+Exposed as Tailwind classes `size-icon-sm`, `size-icon-md`, `size-icon-lg` (also `w-` and `h-`).
+
 ---
 
 ## 3. Component tokens
@@ -376,6 +394,7 @@ Pattern: `component-part-property-state`. Component tokens reference semantic to
 
 Starting set:
 - Button: `button-height-sm` (size-control-sm), `button-height-md` (size-control-md), `button-height-lg` (size-control-lg), `button-padding-x` (inset-lg), `button-radius` (radius-control), `button-primary-bg` (accent.default), `button-primary-bg-hover` (accent.hover), `button-primary-bg-pressed` (accent.pressed), `button-primary-text` (text.on-accent), `button-secondary-border` (border.default), `button-danger-bg` (status.danger.fill)
+  - Added with the Button build: `button-padding-x-sm` (inset-sm), `button-gap` (inline-xs), `button-disabled-bg` (bg.surface-secondary), `button-disabled-text` (text.disabled), `button-secondary-bg` (bg.surface), `button-secondary-bg-hover` (bg.surface-hover), `button-secondary-text` (text.primary), `button-ghost-bg-hover` (bg.surface-hover), `button-ghost-bg-pressed` (bg.surface-secondary), `button-ghost-text` (text.primary), `button-danger-bg-hover` (status.danger.border), `button-danger-bg-pressed` (status.danger.fill-pressed), `button-danger-text` (text.on-danger), `button-target-touch` (size-target-touch, invisible mobile hit area for the small button)
 - Input: `input-height` (size-control-md), `input-padding-x` (inset-md), `input-radius` (radius-control), `input-bg` (bg.surface), `input-border` (border.default), `input-border-focus` (border.focus), `input-border-error` (status.danger.border), `input-text` (text.primary), `input-placeholder` (text.secondary)
 - Card: `card-bg` (bg.surface), `card-border` (border.default), `card-radius` (radius-card), `card-padding` (inset-lg)
 

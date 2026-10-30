@@ -39,8 +39,10 @@
   --prim-color-red-50: #FCEAE8;
   --prim-color-red-300: #FF8C82;
   --prim-color-red-350: #FF7A70;
+  --prim-color-red-400: #F2665C;
   --prim-color-red-600: #C2302A;
   --prim-color-red-700: #B42318;
+  --prim-color-red-800: #912018;
   --prim-color-red-950: #331917;
   --prim-space-0: 0;
   --prim-space-100: 0.5rem;
@@ -116,9 +118,11 @@
   --prim-motion-duration-120: 120ms;
   --prim-motion-duration-200: 200ms;
   --prim-motion-duration-320: 320ms;
+  --prim-motion-duration-800: 800ms;
   --prim-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --prim-motion-ease-enter: cubic-bezier(0, 0, 0, 1);
   --prim-motion-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --prim-motion-ease-linear: cubic-bezier(0, 0, 1, 1);
   --prim-shadow-sm: 0 1px 2px rgb(27 28 32 / 0.06);
   --prim-shadow-md: 0 4px 12px rgb(27 28 32 / 0.08), 0 1px 3px rgb(27 28 32 / 0.06);
   --prim-shadow-lg: 0 12px 32px rgb(27 28 32 / 0.12), 0 2px 6px rgb(27 28 32 / 0.06);
@@ -141,5 +145,6 @@
     --prim-motion-duration-120: 0ms;
     --prim-motion-duration-200: 0ms;
     --prim-motion-duration-320: 0ms;
+    --prim-motion-duration-800: 0ms;
   }
 }
