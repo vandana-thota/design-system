@@ -1,0 +1,33 @@
+name: Drift check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # The checker reads the generated CSS, so build it from tokens.json first.
+      - run: npm run tokens
+      # Fails the job on any error. Warnings are reported but do not fail it.
+      - run: npm run drift
+      # Runs even when the drift step fails, so one run shows both results.
+      - run: npm run drift:test
+        if: always()
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: drift-report
+          path: drift-report.json

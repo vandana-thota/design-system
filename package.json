@@ -11,6 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "tokens": "style-dictionary build --config style-dictionary.config.mjs",
+    "drift": "node scripts/drift/index.mjs",
+    "drift:test": "node --test scripts/drift/drift.test.mjs",
     "predev": "npm run tokens",
     "prebuild": "npm run tokens",
     "prestorybook": "npm run tokens",

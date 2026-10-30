@@ -1,0 +1,47 @@
+{
+  "_format": "Each entry needs: rule (e.g. DS003), reason (why this is fine), and at least one of file, token, match. token can end in * to cover a group: semantic.layout.* . match is text that must appear in the finding's message. An entry that no longer matches anything is reported as a warning so this list cannot go stale.",
+  "entries": [
+    {
+      "rule": "DS003",
+      "file": "src/components/Button/Button.tsx",
+      "match": "content-[\"\"]",
+      "reason": "empty string for a pseudo-element, not a design value"
+    },
+    {
+      "rule": "DS004",
+      "match": "max-tablet",
+      "reason": "breakpoints are layout-only primitives with no semantic layer"
+    },
+    {
+      "rule": "DS006",
+      "file": "docs/tokens-spec.md",
+      "match": "breakpoint-mobile",
+      "reason": "Figma-only frame width; code starts mobile at min-width 0"
+    },
+    {
+      "rule": "DS001",
+      "token": "semantic.type.*",
+      "reason": "type roles are rendered on the Typography Foundations page through dynamic names (text-${role}), so the scanner cannot see that use"
+    },
+    {
+      "rule": "DS001",
+      "token": "semantic.motion.*",
+      "reason": "motion roles are rendered on the Motion Foundations page through dynamic token lookups, so the scanner cannot see that use"
+    },
+    {
+      "rule": "DS001",
+      "token": "semantic.elevation.*",
+      "reason": "elevation roles are rendered on the Radius and Elevation Foundations page through dynamic token lookups, so the scanner cannot see that use"
+    },
+    {
+      "rule": "DS001",
+      "token": "semantic.layout.*",
+      "reason": "layout grid tokens are rendered on the Spacing Foundations page through dynamic token lookups, so the scanner cannot see that use"
+    },
+    {
+      "rule": "DS001",
+      "token": "semantic.radius.pill",
+      "reason": "radius roles are rendered on the Radius and Elevation Foundations page through dynamic token lookups, so the scanner cannot see that use"
+    }
+  ]
+}
