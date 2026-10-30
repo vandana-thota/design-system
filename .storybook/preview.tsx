@@ -2,6 +2,27 @@ import '../src/index.css'
 import type { Preview } from '@storybook/react-vite'
 
 const preview: Preview = {
+  globalTypes: {
+    theme: {
+      description: 'Color theme',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', title: 'Light' },
+          { value: 'dark', title: 'Dark' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  initialGlobals: { theme: 'light' },
+  decorators: [
+    (Story, context) => {
+      document.documentElement.dataset.theme = context.globals.theme === 'dark' ? 'dark' : 'light';
+      return <Story />;
+    },
+  ],
   parameters: {
     controls: {
       matchers: {
