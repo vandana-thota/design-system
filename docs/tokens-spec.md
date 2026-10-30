@@ -387,6 +387,17 @@ Animate opacity and transform only. When `prefers-reduced-motion: reduce` is set
 
 Exposed as Tailwind classes `size-icon-sm`, `size-icon-md`, `size-icon-lg` (also `w-` and `h-`).
 
+### 2.11 Control size roles
+
+| Token | Value | Use |
+|---|---|---|
+| size-control-sm | size-control-sm (32) | Dense tables, toolbars |
+| size-control-md | size-control-md (40) | Default buttons and inputs |
+| size-control-lg | size-control-lg (48) | Primary mobile actions |
+| size-target-touch | size-target-touch (44) | Minimum touch target on mobile |
+
+Exposed as Tailwind classes such as `h-control-md` and `size-target-touch`. Component tokens reference these roles, never the primitives.
+
 ---
 
 ## 3. Component tokens

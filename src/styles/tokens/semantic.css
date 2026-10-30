@@ -95,6 +95,10 @@
   --size-icon-sm: var(--prim-size-icon-sm);
   --size-icon-md: var(--prim-size-icon-md);
   --size-icon-lg: var(--prim-size-icon-lg);
+  --size-control-sm: var(--prim-size-control-sm);
+  --size-control-md: var(--prim-size-control-md);
+  --size-control-lg: var(--prim-size-control-lg);
+  --size-target-touch: var(--prim-size-target-touch);
 }
 
 [data-theme="dark"] {

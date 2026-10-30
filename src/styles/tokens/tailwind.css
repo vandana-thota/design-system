@@ -62,6 +62,10 @@
   --spacing-icon-sm: var(--size-icon-sm);
   --spacing-icon-md: var(--size-icon-md);
   --spacing-icon-lg: var(--size-icon-lg);
+  --spacing-control-sm: var(--size-control-sm);
+  --spacing-control-md: var(--size-control-md);
+  --spacing-control-lg: var(--size-control-lg);
+  --spacing-target-touch: var(--size-target-touch);
   --radius-chip: var(--prim-radius-050);
   --radius-control: var(--prim-radius-075);
   --radius-card: var(--prim-radius-150);
