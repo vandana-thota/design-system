@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "system": {
+    "name": "Design system",
+    "description": "A token-driven design system in React, TypeScript and Tailwind CSS v4, with light and dark themes. Every color, size, space and motion value comes from one JSON file, so changing a token changes every component that uses it.",
+    "descriptionSource": "README.md, first paragraph",
+    "facts": [
+      { "label": "Display font", "text": "Fraunces", "source": "README.md, Themes" },
+      { "label": "Interface font", "text": "IBM Plex Sans", "source": "README.md, Themes" },
+      { "label": "Code font", "text": "IBM Plex Mono", "source": "README.md, Themes" },
+      { "label": "Themes", "text": "Light (Warm Editorial) and dark (Dark Precision), switched with a data-theme attribute on the root element.", "source": "README.md, Themes" },
+      { "label": "Accessibility", "text": "Built to WCAG 2.2 AA, with one documented exception (control borders).", "source": "README.md, Accessibility" },
+      { "label": "Tokens", "text": "tokens/tokens.json is the single source of truth. Figma variables come from it through Token Sync.", "source": "README.md, How the pieces connect" }
+    ]
+  },
+  "components": [
+    {
+      "id": "button",
+      "name": "Button",
+      "source": "src/components/Button/Button.tsx",
+      "intro": {
+        "text": "Primary, secondary, ghost and danger variants; three sizes; loading and disabled states; optional leading and trailing icons.",
+        "source": "README.md, Components"
+      },
+      "properties": {
+        "variant": ["primary", "secondary", "ghost", "danger"],
+        "size": ["sm", "md", "lg"],
+        "state": ["default", "hover", "pressed", "focus", "disabled", "loading"]
+      },
+      "build": {
+        "type": "frame",
+        "name": "Button",
+        "direction": "HORIZONTAL",
+        "primary": "CENTER",
+        "counter": "CENTER",
+        "height": [
+          { "when": { "size": "sm" }, "var": "Component/button/height/sm" },
+          { "when": { "size": "md" }, "var": "Component/button/height/md" },
+          { "when": { "size": "lg" }, "var": "Component/button/height/lg" }
+        ],
+        "paddingX": [
+          { "when": { "size": "sm" }, "var": "Component/button/padding-x-sm" },
+          { "var": "Component/button/padding-x" }
+        ],
+        "gap": "Component/button/gap",
+        "radius": "Component/button/radius",
+        "fill": [
+          { "when": { "variant": "ghost", "state": "disabled" }, "var": null },
+          { "when": { "state": "disabled" }, "var": "Component/button/disabled/bg" },
+          { "when": { "variant": "primary", "state": "hover" }, "var": "Component/button/primary/bg-hover" },
+          { "when": { "variant": "primary", "state": "pressed" }, "var": "Component/button/primary/bg-pressed" },
+          { "when": { "variant": "primary" }, "var": "Component/button/primary/bg" },
+          { "when": { "variant": "secondary", "state": "hover" }, "var": "Component/button/secondary/bg-hover" },
+          { "when": { "variant": "secondary", "state": "pressed" }, "var": "Component/button/ghost/bg-pressed" },
+          { "when": { "variant": "secondary" }, "var": "Component/button/secondary/bg" },
+          { "when": { "variant": "ghost", "state": "hover" }, "var": "Component/button/ghost/bg-hover" },
+          { "when": { "variant": "ghost", "state": "pressed" }, "var": "Component/button/ghost/bg-pressed" },
+          { "when": { "variant": "ghost" }, "var": null },
+          { "when": { "variant": "danger", "state": "hover" }, "var": "Component/button/danger/bg-hover" },
+          { "when": { "variant": "danger", "state": "pressed" }, "var": "Component/button/danger/bg-pressed" },
+          { "when": { "variant": "danger" }, "var": "Component/button/danger/bg" }
+        ],
+        "stroke": [
+          { "when": { "variant": "secondary", "state": "disabled" }, "var": null },
+          { "when": { "variant": "secondary" }, "var": "Component/button/secondary/border" },
+          { "var": null }
+        ],
+        "strokeWidth": "Semantic/border-width/default",
+        "children": [
+          {
+            "type": "spinner",
+            "name": "Spinner",
+            "when": { "state": "loading" },
+            "size": [
+              { "when": { "size": "sm" }, "var": "Semantic/size/icon-sm" },
+              { "var": "Semantic/size/icon-md" }
+            ],
+            "color": [
+              { "when": { "variant": "primary" }, "var": "Component/button/primary/text" },
+              { "when": { "variant": "secondary" }, "var": "Component/button/secondary/text" },
+              { "when": { "variant": "ghost" }, "var": "Component/button/ghost/text" },
+              { "when": { "variant": "danger" }, "var": "Component/button/danger/text" }
+            ],
+            "strokeWidth": "Semantic/border-width/emphasis"
+          },
+          {
+            "type": "text",
+            "name": "Label",
+            "text": "Button",
+            "typeStyle": [
+              { "when": { "size": "sm" }, "var": "Semantic/type/label-s" },
+              { "var": "Semantic/type/label-m" }
+            ],
+            "fill": [
+              { "when": { "state": "disabled" }, "var": "Component/button/disabled/text" },
+              { "when": { "variant": "primary" }, "var": "Component/button/primary/text" },
+              { "when": { "variant": "secondary" }, "var": "Component/button/secondary/text" },
+              { "when": { "variant": "ghost" }, "var": "Component/button/ghost/text" },
+              { "when": { "variant": "danger" }, "var": "Component/button/danger/text" }
+            ]
+          }
+        ],
+        "focusRing": {
+          "name": "Focus ring",
+          "when": { "state": "focus" },
+          "color": "Semantic/focus/ring/color",
+          "width": "Semantic/focus/ring/width",
+          "offset": "Semantic/focus/ring/offset",
+          "radius": "Component/button/radius"
+        }
+      },
+      "annotations": {
+        "whenToUse": [
+          { "text": "Primary is for the one main action on a screen.", "source": "Button.tsx, comment on the variant prop" },
+          { "text": "Secondary: a supporting action next to a primary button, such as Cancel.", "proposed": true, "source": "Proposed, no text in code" },
+          { "text": "Ghost: a low-emphasis action, such as one inside a toolbar or a table row.", "proposed": true, "source": "Proposed, no text in code" },
+          { "text": "Danger: an action that deletes something or cannot be undone.", "proposed": true, "source": "Proposed, no text in code" },
+          { "text": "Sizes: sm for dense tables and toolbars, md for default buttons, lg for primary mobile actions.", "source": "tokens/tokens.json, descriptions of primitive.size.control-sm, control-md and control-lg" }
+        ],
+        "states": [
+          { "name": "default", "text": "The resting look of each variant.", "source": "Button.tsx, comment on the resting styles" },
+          { "name": "hover", "text": "Hover feedback, only applied while the button is usable.", "source": "Button.tsx, comment on the feedback styles" },
+          { "name": "pressed", "text": "Pressed feedback, only applied while the button is usable.", "source": "Button.tsx, comment on the feedback styles" },
+          { "name": "focus", "text": "A visible 2px focus ring on keyboard focus.", "source": "README.md, Accessibility" },
+          { "name": "disabled", "text": "Uses dedicated disabled colors, not opacity.", "source": "README.md, Accessibility" },
+          { "name": "loading", "text": "Shows a spinner and ignores clicks. The button stays focusable and keeps its width.", "source": "Button.tsx, comment on the loading prop" }
+        ],
+        "accessibility": [
+          { "text": "A visible 2px focus ring on keyboard focus for every interactive element, in both themes.", "source": "README.md, Accessibility" },
+          { "text": "A button needs either visible text or an aria-label (icon-only buttons).", "source": "Button.tsx, comment on ButtonProps" },
+          { "text": "Loading sets aria-busy and aria-disabled, so the button stays focusable. Disabled uses the native disabled attribute.", "source": "Button.tsx, attributes on the button element" },
+          { "text": "Interactive targets are at least 24px, and the small button gets a 44px hit area on mobile.", "source": "README.md, Accessibility" },
+          { "text": "The loading spinner stops spinning when the user prefers reduced motion.", "source": "README.md, Accessibility" },
+          { "text": "Leading and trailing icons are hidden from screen readers (aria-hidden).", "source": "Button.tsx, icon wrappers" }
+        ]
+      },
+      "knownGaps": [
+        "Secondary pressed uses button/ghost/bg-pressed in code; there is no button/secondary/bg-pressed token. The Figma variant follows the code.",
+        "Ghost has no background token; its resting fill is plain transparent in code, so the Figma fill is empty.",
+        "The spinner stroke is 2 SVG units in code with no token. Figma binds it to border-width/emphasis, which is also 2px.",
+        "The 44px mobile hit area (button/target-touch) is invisible in code and is not drawn in Figma.",
+        "Not built in Figma: leadingIcon, trailingIcon and fullWidth.",
+        "The focus ring is a separate rectangle. Its size is the button size plus the ring offset, so that size is calculated from the variable values and is not bound. Its corner radius uses the button radius without the offset.",
+        "State names (hover, pressed, focus) are CSS states in code, not props."
+      ]
+    },
+    {
+      "id": "input",
+      "name": "Input",
+      "source": "src/components/Input/Input.tsx",
+      "intro": {
+        "text": "Label, helper text, error, success, loading and disabled states.",
+        "source": "README.md, Components (read-only and required are left out of this Figma component)"
+      },
+      "properties": {
+        "state": ["default", "focus", "error", "success", "loading", "disabled"]
+      },
+      "build": {
+        "type": "frame",
+        "name": "Input",
+        "direction": "VERTICAL",
+        "fixedWidth": 320,
+        "gap": "Component/input/gap",
+        "children": [
+          { "type": "text", "name": "Label", "text": "Label", "fillWidth": true, "typeStyle": "Semantic/type/label-m", "fill": "Component/input/label-text" },
+          {
+            "type": "frame",
+            "name": "Field",
+            "direction": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "CENTER",
+            "fillWidth": true,
+            "height": "Component/input/height",
+            "paddingX": "Component/input/padding-x",
+            "gap": "Component/input/padding-x",
+            "radius": "Component/input/radius",
+            "fill": [
+              { "when": { "state": "disabled" }, "var": "Component/input/bg-disabled" },
+              { "var": "Component/input/bg" }
+            ],
+            "stroke": [
+              { "when": { "state": "focus" }, "var": "Component/input/border-focus" },
+              { "when": { "state": "error" }, "var": "Component/input/border-error" },
+              { "var": "Component/input/border" }
+            ],
+            "strokeWidth": [
+              { "when": { "state": ["focus", "error"] }, "var": "Component/input/border-width-emphasis" },
+              { "var": "Component/input/border-width" }
+            ],
+            "children": [
+              {
+                "type": "text",
+                "name": "Value",
+                "text": "Input text",
+                "fillWidth": true,
+                "typeStyle": "Semantic/type/body-l",
+                "fill": [
+                  { "when": { "state": "disabled" }, "var": "Component/input/text-disabled" },
+                  { "when": { "state": "default" }, "var": "Component/input/placeholder" },
+                  { "var": "Component/input/text" }
+                ]
+              },
+              {
+                "type": "spinner",
+                "name": "Spinner",
+                "when": { "state": "loading" },
+                "size": "Semantic/size/icon-md",
+                "color": "Component/input/label-text",
+                "strokeWidth": "Semantic/border-width/emphasis"
+              }
+            ]
+          },
+          { "type": "text", "name": "Helper text", "text": "Helper text", "fillWidth": true, "typeStyle": "Semantic/type/body-s", "fill": "Component/input/helper-text" },
+          {
+            "type": "frame",
+            "name": "Error message",
+            "when": { "state": "error" },
+            "direction": "HORIZONTAL",
+            "counter": "CENTER",
+            "fillWidth": true,
+            "gap": "Semantic/space/inline-xs",
+            "children": [
+              { "type": "icon", "name": "Error icon", "size": "Semantic/size/icon-sm", "color": "Component/input/error-text" },
+              { "type": "text", "name": "Message", "text": "Error message", "fillWidth": true, "typeStyle": "Semantic/type/body-s", "fill": "Component/input/error-text" }
+            ]
+          },
+          {
+            "type": "frame",
+            "name": "Success message",
+            "when": { "state": "success" },
+            "direction": "HORIZONTAL",
+            "counter": "CENTER",
+            "fillWidth": true,
+            "gap": "Semantic/space/inline-xs",
+            "children": [
+              { "type": "icon", "name": "Success icon", "size": "Semantic/size/icon-sm", "color": "Component/input/success-text" },
+              { "type": "text", "name": "Message", "text": "Success message", "fillWidth": true, "typeStyle": "Semantic/type/body-s", "fill": "Component/input/success-text" }
+            ]
+          }
+        ]
+      },
+      "annotations": {
+        "whenToUse": [
+          { "text": "Use for a single line of text, such as a name or an email address.", "proposed": true, "source": "Proposed, no text in code" },
+          { "text": "The label is always visible. Inputs are never labelled by placeholder alone.", "source": "Input.tsx, comment on the label prop" },
+          { "text": "Use helper text for a format hint. Use the error message to say what to fix.", "proposed": true, "source": "Proposed, no text in code" },
+          { "text": "A required input adds \"(required)\" to its label.", "source": "Input.tsx, label markup" }
+        ],
+        "states": [
+          { "name": "default", "text": "The resting field. It shows the placeholder.", "source": "Input.tsx, placeholder styles" },
+          { "name": "focus", "text": "The border grows from the default width to the emphasis width and changes to the focus color.", "source": "Input.tsx, comment above the field styles" },
+          { "name": "error", "text": "The error message turns the field into its error state: emphasis border width, error border color and an error message with an icon.", "source": "Input.tsx, comment on the error prop" },
+          { "name": "success", "text": "Shows the success message with a check icon.", "source": "Input.tsx, comment on the success prop" },
+          { "name": "loading", "text": "Shows a spinner inside the field and sets aria-busy.", "source": "Input.tsx, comment on the loading prop" },
+          { "name": "disabled", "text": "Uses dedicated disabled colors, not opacity.", "source": "README.md, Accessibility" }
+        ],
+        "accessibility": [
+          { "text": "The label is tied to the field with htmlFor, and helper and message text are linked with aria-describedby.", "source": "Input.tsx, label and aria-describedby" },
+          { "text": "An error sets aria-invalid and its message uses role=\"alert\". A success message uses role=\"status\".", "source": "Input.tsx, message markup" },
+          { "text": "The input border has a contrast of about 1.4:1, below the 3:1 that WCAG 1.4.11 asks for. This is a recorded decision. Each input has other cues: a visible label, a surface fill that differs from the page, and a focus ring checked at 3:1 or better.", "source": "README.md, Known exception: control borders" },
+          { "text": "A visible 2px focus ring on keyboard focus for every interactive element, in both themes.", "source": "README.md, Accessibility" },
+          { "text": "The loading spinner stops spinning when the user prefers reduced motion.", "source": "README.md, Accessibility" }
+        ]
+      },
+      "knownGaps": [
+        "The Figma component has a typed width of 320px. In code the input is as wide as its container and no width token exists. A token would need to be proposed first.",
+        "Read-only and filled are left out on purpose. README lists read-only but Input.tsx has no read-only styling or tokens.",
+        "The error and success icons are plain filled circles, not the glyphs in code.",
+        "In code the focus state changes the border only (no separate ring). The Figma variant follows the code. README says every interactive element has a focus ring.",
+        "The \"(required)\" label text and the Value sample text are not variants; the value text shows as the placeholder color in default and as typed text in the other states.",
+        "Helper text is shown in every state. In code it only appears when the helperText prop is set.",
+        "Input has no hover state in code or tokens."
+      ]
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "source": "src/components/Card/Card.tsx",
+      "intro": {
+        "text": "A plain container, a link or a button. An interactive card is one control and cannot contain other links or buttons.",
+        "source": "README.md, Components"
+      },
+      "properties": {
+        "kind": ["static", "interactive"],
+        "padding": ["md", "lg"],
+        "state": ["default", "hover", "pressed", "focus", "selected", "disabled"]
+      },
+      "exclude": [
+        { "kind": "static", "state": ["hover", "pressed", "focus", "selected", "disabled"] }
+      ],
+      "build": {
+        "type": "frame",
+        "name": "Card",
+        "direction": "VERTICAL",
+        "fixedWidth": 320,
+        "padding": [
+          { "when": { "padding": "lg" }, "var": "Component/card/padding-lg" },
+          { "var": "Component/card/padding" }
+        ],
+        "gap": "Component/card/gap",
+        "radius": "Component/card/radius",
+        "fill": [
+          { "when": { "state": "disabled" }, "var": "Component/card/bg-disabled" },
+          { "when": { "state": "selected" }, "var": "Component/card/bg-selected" },
+          { "when": { "state": "hover" }, "var": "Component/card/bg-hover" },
+          { "when": { "state": "pressed" }, "var": "Component/card/bg-pressed" },
+          { "var": "Component/card/bg" }
+        ],
+        "stroke": [
+          { "when": { "state": "selected" }, "var": "Component/card/border-selected" },
+          { "var": "Component/card/border" }
+        ],
+        "strokeWidth": [
+          { "when": { "state": "selected" }, "var": "Semantic/border-width/emphasis" },
+          { "var": "Semantic/border-width/default" }
+        ],
+        "children": [
+          {
+            "type": "frame",
+            "name": "Header",
+            "direction": "VERTICAL",
+            "fillWidth": true,
+            "children": [
+              {
+                "type": "text",
+                "name": "Title",
+                "text": "Card title",
+                "fillWidth": true,
+                "typeStyle": "Semantic/type/title-m",
+                "fill": [
+                  { "when": { "state": "disabled" }, "var": "Component/card/text-disabled" },
+                  { "var": "Component/card/title-text" }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "frame",
+            "name": "Body",
+            "direction": "VERTICAL",
+            "fillWidth": true,
+            "children": [
+              {
+                "type": "text",
+                "name": "Body text",
+                "text": "Body text for the card.",
+                "fillWidth": true,
+                "typeStyle": "Semantic/type/body-m",
+                "fill": [
+                  { "when": { "state": "disabled" }, "var": "Component/card/text-disabled" },
+                  { "var": "Component/card/body-text" }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "frame",
+            "name": "Footer",
+            "direction": "VERTICAL",
+            "fillWidth": true,
+            "children": [
+              {
+                "type": "text",
+                "name": "Footer text",
+                "text": "Footer text",
+                "fillWidth": true,
+                "typeStyle": "Semantic/type/body-s",
+                "fill": [
+                  { "when": { "state": "disabled" }, "var": "Component/card/text-disabled" },
+                  { "var": "Component/card/body-text" }
+                ]
+              }
+            ]
+          }
+        ],
+        "focusRing": {
+          "name": "Focus ring",
+          "when": { "kind": "interactive", "state": "focus" },
+          "color": "Semantic/focus/ring/color",
+          "width": "Semantic/focus/ring/width",
+          "offset": "Semantic/focus/ring/offset",
+          "radius": "Component/card/radius"
+        }
+      },
+      "annotations": {
+        "whenToUse": [
+          { "text": "Kind: static is a plain container. Interactive renders as a link when it has an href, or as a button when it has an onClick.", "source": "Card.tsx, comment above CardProps" },
+          { "text": "Use a static card to group related content. Use an interactive card when the whole card is one destination or one choice.", "proposed": true, "source": "Proposed, no text in code" },
+          { "text": "Padding is md (default) or lg.", "source": "Card.tsx, CardPadding type" },
+          { "text": "The parts are Card.Header, Card.Title, Card.Body and Card.Footer. Inside an interactive card they render as spans, and the footer is text only.", "source": "Card.tsx, comments on the slots" }
+        ],
+        "states": [
+          { "name": "default", "text": "The resting card, with the default border.", "source": "Card.tsx, resting border styles" },
+          { "name": "hover", "text": "The background changes to the hover color. Interactive cards only.", "source": "Card.tsx, hover styles" },
+          { "name": "pressed", "text": "The background changes to the pressed color. Interactive cards only.", "source": "Card.tsx, active styles" },
+          { "name": "focus", "text": "A visible 2px focus ring on keyboard focus for every interactive element.", "source": "README.md, Accessibility" },
+          { "name": "selected", "text": "A link card marks the current page with aria-current. A button card marks the chosen card with aria-pressed. The border grows to the emphasis width in the accent color.", "source": "Card.tsx, comments on the selected prop" },
+          { "name": "disabled", "text": "Button cards only. Uses the disabled background and disabled text color for everything inside.", "source": "Card.tsx, button card styles" }
+        ],
+        "accessibility": [
+          { "text": "An interactive card is a single control, so nothing inside it may be interactive. In development the card logs an error if it contains a link or a button.", "source": "Card.tsx, comment above the INTERACTIVE check" },
+          { "text": "Inside an interactive card the title is a span, not a heading, because links and buttons cannot contain headings.", "source": "Card.tsx, Title" },
+          { "text": "Interactive cards use a border with a contrast of about 1.4:1, below the 3:1 that WCAG 1.4.11 asks for. This is a recorded decision, with other cues: a surface fill that differs from the page and a focus ring checked at 3:1 or better.", "source": "README.md, Known exception: control borders" },
+          { "text": "A visible 2px focus ring on keyboard focus for every interactive element, in both themes.", "source": "README.md, Accessibility" }
+        ]
+      },
+      "knownGaps": [
+        "The Figma component has a typed width of 320px. In code the card is as wide as its container and no width token exists.",
+        "Static cards only have the default state. The other state combinations are left out of the Figma set (see exclude).",
+        "In code the padding shrinks by the border growth when selected, so content does not move. In Figma the stroke is inside the card and does not move content, so padding stays the same.",
+        "Link cards and button cards look the same in Figma. Only button cards can be disabled in code.",
+        "The title, body and footer text are sample text.",
+        "The focus ring is a separate rectangle sized from the variable values, like Button.",
+        "Card.tsx has no focus style of its own. The focus ring in Figma follows the README rule."
+      ]
+    }
+  ]
+}

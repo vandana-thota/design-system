@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { font: 12px/1.5 system-ui, sans-serif; margin: 16px; color: #1b1c20; }
+    button { font: inherit; padding: 6px 12px; margin-top: 8px; }
+    h2 { font-size: 13px; margin: 16px 0 4px; }
+    ul { margin: 4px 0; padding-left: 18px; }
+    li { margin-bottom: 4px; }
+    code { font-family: ui-monospace, monospace; font-size: 11px; }
+    .error { color: #b42318; }
+    #out { display: none; }
+  </style>
+</head>
+<body>
+  <p>Run <b>Token Sync</b> first. Then choose <b>components.json</b>. The file is read here in the plugin and never leaves your computer.</p>
+  <input id="file" type="file" accept=".json,application/json" />
+  <br />
+  <button id="run" disabled>Build pages and components</button>
+  <p id="status"></p>
+  <div id="out"></div>
+
+  <script>
+    var text = null;
+    var fileInput = document.getElementById('file');
+    var runButton = document.getElementById('run');
+    var statusEl = document.getElementById('status');
+    var out = document.getElementById('out');
+
+    function esc(s) {
+      return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; });
+    }
+    function list(title, items, cls, fmt) {
+      if (!items.length) return '';
+      return '<h2 class="' + (cls || '') + '">' + title + ' (' + items.length + ')</h2><ul>' +
+        items.map(function (i) { return '<li class="' + (cls || '') + '">' + fmt(i) + '</li>'; }).join('') + '</ul>';
+    }
+    var plain = function (s) { return esc(s); };
+
+    fileInput.onchange = function () {
+      var f = fileInput.files[0];
+      if (!f) return;
+      var reader = new FileReader();
+      reader.onload = function () { text = reader.result; runButton.disabled = false; statusEl.textContent = 'Loaded ' + f.name; };
+      reader.readAsText(f);
+    };
+
+    runButton.onclick = function () {
+      runButton.disabled = true;
+      statusEl.textContent = 'Working...';
+      parent.postMessage({ pluginMessage: { type: 'build', spec: text } }, '*');
+    };
+
+    onmessage = function (event) {
+      var msg = event.data.pluginMessage;
+      if (!msg) return;
+      runButton.disabled = false;
+      if (msg.type === 'failed') {
+        statusEl.innerHTML = '<span class="error">Failed: ' + esc(msg.message) + '</span>';
+        return;
+      }
+      var r = msg.result;
+      statusEl.textContent = 'Finished. Pages: ' + (r.pages.join(', ') || 'none');
+      var html = '';
+      html += list('Errors', r.errors, 'error', plain);
+      html += list('Problems in components.json', r.problems, 'error', plain);
+      html += list('Components', r.components, '', function (c) {
+        return esc(c.name) + ': ' + c.created + ' variants created, ' + c.updated + ' updated, ' + c.variants + ' in the set';
+      });
+      html += list('Figma calls that failed (exact error and fallback)', r.apiIssues, 'error', function (i) {
+        return '<code>' + esc(i.call) + '</code> failed ' + i.count + ' time(s) with: ' + esc(i.message) + '<br>Fallback: ' + esc(i.fallback);
+      });
+      html += list('Missing variables', r.missingVariables, 'error', function (s) { return '<code>' + esc(s) + '</code>'; });
+      html += list('Not bound to a variable', r.unbound, '', function (s) { return '<code>' + esc(s) + '</code>'; });
+      html += list('Font fallbacks', r.fontFallbacks, '', plain);
+      html += list('Notes', r.notes, '', plain);
+      out.innerHTML = html || '<p>No problems.</p>';
+      out.style.display = 'block';
+    };
+  </script>
+</body>
+</html>
