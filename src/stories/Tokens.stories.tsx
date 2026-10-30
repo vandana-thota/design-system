@@ -10,6 +10,17 @@ const roles = [
   'text-body-xl', 'text-body-l', 'text-body-m', 'text-body-s', 'text-label-m', 'text-label-s', 'text-caption', 'text-code',
 ] as const
 
+// Filled swatches use the "on" text token so labels stay readable in both themes.
+const swatches = [
+  ['bg-canvas', 'text-primary'],
+  ['bg-surface', 'text-primary'],
+  ['bg-surface-secondary', 'text-primary'],
+  ['bg-surface-hover', 'text-primary'],
+  ['bg-surface-selected', 'text-primary'],
+  ['bg-accent-default', 'text-on-accent'],
+  ['bg-status-danger-fill', 'text-on-danger'],
+] as const
+
 export const Check: Story = {
   render: () => (
     <div className="bg-canvas text-primary p-inset-xl flex flex-col gap-stack-lg">
@@ -20,8 +31,8 @@ export const Check: Story = {
         <button className="bg-accent-default text-on-accent rounded-control px-inset-lg h-10 text-label-m self-start">Primary</button>
       </div>
       <div className="grid grid-cols-2 gap-stack-sm">
-        {['bg-canvas', 'bg-surface', 'bg-surface-secondary', 'bg-surface-hover', 'bg-surface-selected', 'bg-accent-default', 'bg-status-danger-fill'].map((c) => (
-          <div key={c} className={`${c} border border-default rounded-chip p-inset-sm text-code text-primary`}>{c}</div>
+        {swatches.map(([fill, text]) => (
+          <div key={fill} className={`${fill} ${text} border border-default rounded-chip p-inset-sm text-code`}>{fill}</div>
         ))}
       </div>
       {roles.map((r) => (
