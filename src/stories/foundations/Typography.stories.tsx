@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Page, PageHeader, Section, TokenName } from './components'
-import { toPx, typeRole, typeRoleNames, type TypeMode } from './tokenData'
+import { describe, toPx, typeRole, typeRoleNames, type TypeMode } from './tokenData'
 
 const meta = {
   title: 'Foundations/Typography',
@@ -14,23 +14,6 @@ const modes: { key: TypeMode; label: string }[] = [
   { key: 'tablet', label: 'Tablet' },
   { key: 'desktop', label: 'Desktop' },
 ]
-
-const uses: Record<string, string> = {
-  'display-xl': 'Hero headline',
-  'display-l': 'Section intros, large stats',
-  'headline-m': 'Page titles',
-  'headline-s': 'Section titles',
-  'title-m': 'Card and dialog titles',
-  'title-s': 'Small card titles, table group headers',
-  'body-xl': 'Lead paragraphs',
-  'body-l': 'Default body, input text',
-  'body-m': 'Dense UI, table cells',
-  'body-s': 'Helper text',
-  'label-m': 'Buttons, form labels, tabs',
-  'label-s': 'Small buttons, badges',
-  caption: 'Captions, timestamps',
-  code: 'Code, token names',
-}
 
 const sampleFor = (role: string) => (role === 'code' ? 'color.bg.surface' : 'Warm editorial, precise interface')
 
@@ -46,7 +29,7 @@ function RoleCard({ role }: { role: string }) {
           <span className="text-code text-secondary">{`text-${role}`}</span>
         </div>
         <p className="text-body-m text-secondary">
-          {familyName(base.fontFamily)} {base.fontWeight}, tracking {base.letterSpacing}. {uses[role]}.
+          {familyName(base.fontFamily)} {base.fontWeight}, tracking {base.letterSpacing}. {describe(`semantic.type.${role}`)}.
         </p>
       </header>
       {modes.map(({ key, label }) => {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Cell, DocTable, Page, PageHeader, Section, TokenName } from './components'
-import { listTokens, listTokensBySize, primitiveValue, pxLabel, resolveToken } from './tokenData'
+import { describe, listTokens, listTokensBySize, primitiveValue, pxLabel, resolveToken } from './tokenData'
 
 const meta = {
   title: 'Foundations/Spacing',
@@ -22,17 +22,6 @@ const roleGroups = [
   { prefix: 'inline', title: 'Inline', intro: 'Horizontal gaps between items.' },
   { prefix: 'section', title: 'Section', intro: 'Vertical space between page sections, per breakpoint.' },
 ]
-
-const sizeUses: Record<string, string> = {
-  'icon-sm': 'Inline icons',
-  'icon-md': 'Default icons',
-  'icon-lg': 'Standalone icons',
-  'control-sm': 'Dense tables, toolbars',
-  'control-md': 'Default buttons and inputs',
-  'control-lg': 'Primary mobile actions',
-  'target-min': 'WCAG 2.2 minimum target',
-  'target-touch': 'Minimum touch target on mobile',
-}
 
 const layoutModes = ['mobile', 'tablet', 'desktop', 'wide']
 
@@ -112,7 +101,7 @@ export const Overview: Story = {
                   <TokenName>{t.name}</TokenName>
                 </Cell>
                 <Cell>{pxLabel(value)}</Cell>
-                <Cell>{sizeUses[t.path.split('.')[2]]}</Cell>
+                <Cell>{describe(t.path)}</Cell>
                 <Cell>
                   <div aria-hidden="true" style={{ width: value, height: value }} className="bg-accent-subtle border border-default rounded-chip" />
                 </Cell>

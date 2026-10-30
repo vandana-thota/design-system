@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Cell, DocTable, Page, PageHeader, Section, TokenName } from './components'
-import { listTokens, resolveToken } from './tokenData'
+import { describe, listTokens, resolveToken } from './tokenData'
 
 const meta = {
   title: 'Foundations/Motion',
@@ -9,13 +9,6 @@ const meta = {
 } satisfies Meta
 export default meta
 type Story = StoryObj<typeof meta>
-
-const uses: Record<string, string> = {
-  hover: 'Hover and press feedback',
-  enter: 'Menus, toasts, popovers appearing',
-  exit: 'Elements leaving',
-  emphasis: 'Dialogs, drawers, layout changes',
-}
 
 type Transition = { duration: string; easing: string }
 
@@ -135,7 +128,7 @@ export const Overview: Story = {
                     {refName(raw.duration)} ({String((resolveToken(t.path) as Transition).duration)})
                   </Cell>
                   <Cell mono>{refName(raw.easing)}</Cell>
-                  <Cell>{uses[role]}</Cell>
+                  <Cell>{describe(t.path)}</Cell>
                   <Cell>
                     <Demo role={role} />
                   </Cell>

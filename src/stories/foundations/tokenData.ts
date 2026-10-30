@@ -7,6 +7,7 @@ export type TypeMode = 'mobile' | 'tablet' | 'desktop'
 
 type Node = {
   $type?: string
+  $description?: string
   $value?: unknown
   $extensions?: {
     mode?: { dark?: unknown }
@@ -62,6 +63,9 @@ export const semanticValue = (name: string, theme: Theme = 'light'): string =>
 
 export const primitiveValue = (name: string, theme: Theme = 'light'): string =>
   String(resolveToken(`primitive.${name}`, theme))
+
+/** The token's $description (what it is used for), or an empty string when it has none. */
+export const describe = (path: string): string => getNode(path).$description ?? ''
 
 /** Every token under a path prefix, in file order. listTokens('semantic.color.bg') */
 export const listTokens = (prefix: string): TokenEntry[] => {

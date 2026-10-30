@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Cell, DocTable, Page, PageHeader, Section, ThemePanel, TokenName } from './components'
-import { listTokens, listTokensBySize, pxLabel, resolveToken, type Theme } from './tokenData'
+import { describe, listTokens, listTokensBySize, pxLabel, resolveToken, type Theme } from './tokenData'
 
 const meta = {
   title: 'Foundations/Radius and Elevation',
@@ -12,21 +12,6 @@ type Story = StoryObj<typeof meta>
 const themes: Theme[] = ['light', 'dark']
 
 const refName = (value: unknown) => String(value).replace(/[{}]/g, '').replace(/^primitive\./, '')
-
-const radiusUses: Record<string, string> = {
-  chip: 'Badges, tags, checkboxes',
-  control: 'Buttons, inputs, selects',
-  card: 'Cards, panels',
-  dialog: 'Dialogs, sheets',
-  pill: 'Pills, avatars, toggles',
-}
-
-const elevationUses: Record<string, string> = {
-  flat: 'Cards, panels (use a border instead of a shadow)',
-  raised: 'Sticky headers',
-  overlay: 'Menus, popovers, toasts',
-  modal: 'Dialogs',
-}
 
 function RadiusBox({ radius }: { radius: string }) {
   return (
@@ -49,7 +34,7 @@ function ElevationCard({ name, theme }: { name: string; theme: Theme }) {
       className={`bg-surface rounded-card p-inset-lg flex flex-col gap-stack-xs ${flat ? 'border border-default' : ''}`}
     >
       <TokenName>{`elevation.${name}`}</TokenName>
-      <p className="text-body-m text-secondary">{elevationUses[name]}</p>
+      <p className="text-body-m text-secondary">{describe(`semantic.elevation.${name}`)}</p>
       <p className="text-code text-secondary break-words">{flat ? 'no shadow' : shadow}</p>
     </article>
   )
@@ -92,7 +77,7 @@ export const Overview: Story = {
                 </Cell>
                 <Cell mono>{refName(t.node.$value)}</Cell>
                 <Cell>{pxLabel(value)}</Cell>
-                <Cell>{radiusUses[t.path.split('.')[2]]}</Cell>
+                <Cell>{describe(t.path)}</Cell>
                 <Cell>
                   <RadiusBox radius={value} />
                 </Cell>
@@ -136,6 +121,21 @@ export const Overview: Story = {
             </ThemePanel>
           ))}
         </div>
+      </Section>
+
+      <Section title="Layers" intro="Stacking order for page layers. Higher numbers sit above lower ones. Use the token, never a raw z-index number.">
+        <DocTable label="Layers (z-index)" columns={['Token', 'z-index']}>
+          {listTokens('primitive.layer').map((t) => (
+            <tr key={t.path}>
+              <Cell>
+                <TokenName>{t.name}</TokenName>
+              </Cell>
+              <Cell>
+                <span className="tabular">{String(resolveToken(t.path))}</span>
+              </Cell>
+            </tr>
+          ))}
+        </DocTable>
       </Section>
     </Page>
   ),
