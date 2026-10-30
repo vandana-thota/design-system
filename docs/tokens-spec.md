@@ -261,6 +261,7 @@ Contrast (checked)
 | status.warning.text on .bg | 5.6 | 9.1 | 4.5 |
 | status.danger.text on .bg | 5.7 | 7.2 | 4.5 |
 | text.on-danger on status.danger.fill | 5.6 | 7.4 | 4.5 |
+| text.primary on bg.surface-secondary (card pressed) | 14.2 | 13.5 | 4.5 |
 | text.on-danger on status.danger.border (danger button hover) | 6.6 | 8.4 | 4.5 |
 | text.on-danger on status.danger.fill-pressed | 8.7 | 6.1 | 4.5 |
 
@@ -398,6 +399,7 @@ Starting set:
 - Input: `input-height` (size-control-md), `input-padding-x` (inset-md), `input-radius` (radius-control), `input-bg` (bg.surface), `input-border` (border.default), `input-border-focus` (border.focus), `input-border-error` (status.danger.border), `input-text` (text.primary), `input-placeholder` (text.secondary)
   - Added with the Input build: `input-bg-disabled` (bg.surface-secondary), `input-text-disabled` (text.disabled), `input-label-text` (text.secondary), `input-helper-text` (text.secondary), `input-error-text` (status.danger.text), `input-success-text` (status.success.text), `input-gap` (stack-xs, label to input), `input-border-width` (border-width-default), `input-border-width-emphasis` (border-width-emphasis, on focus and error; horizontal padding is reduced by the difference so text does not shift)
 - Card: `card-bg` (bg.surface), `card-border` (border.default), `card-radius` (radius-card), `card-padding` (inset-lg)
+  - Added with the Card build: `card-bg-hover` (bg.surface-hover), `card-bg-selected` (bg.surface-selected), `card-bg-disabled` (bg.surface-secondary), `card-border-selected` (accent.default), `card-padding-lg` (inset-xl), `card-gap` (stack-sm), `card-title-text` (text.primary), `card-body-text` (text.secondary), `card-bg-pressed` (bg.surface-secondary), `card-text-disabled` (text.disabled)
 
 New component tokens are added as each component is built, following the same pattern.
 

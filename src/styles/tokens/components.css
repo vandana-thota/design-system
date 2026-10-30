@@ -48,5 +48,15 @@
   --card-border: var(--color-border-default);
   --card-radius: var(--radius-card);
   --card-padding: var(--space-inset-lg);
+  --card-bg-hover: var(--color-bg-surface-hover);
+  --card-bg-selected: var(--color-bg-surface-selected);
+  --card-bg-disabled: var(--color-bg-surface-secondary);
+  --card-border-selected: var(--color-accent-default);
+  --card-padding-lg: var(--space-inset-xl);
+  --card-gap: var(--space-stack-sm);
+  --card-title-text: var(--color-text-primary);
+  --card-body-text: var(--color-text-secondary);
+  --card-bg-pressed: var(--color-bg-surface-secondary);
+  --card-text-disabled: var(--color-text-disabled);
 }
 
