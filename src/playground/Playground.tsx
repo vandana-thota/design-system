@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useReducer } from 'react'
+import { useEffect, useMemo, useReducer, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { Button } from '../components/index.ts'
 import { IMPLEMENTATION_FILES } from './model/implementation.ts'
 import { planFix } from './model/fix.ts'
 import { runGovernance, tokenChain, tokensForHex } from './model/governance.ts'
+import { revealHeading, summarizeCounts } from './model/reveal.ts'
 import { hasDrift, initialSession, isStale, reduce } from './model/session.ts'
 import type { Action, Environment, Session } from './model/session.ts'
 import type { IssueKind } from './model/report.ts'
@@ -48,6 +49,7 @@ export function Playground() {
   const [session, dispatch] = useReducer(reducer, env, initialSession)
   const governance = useMemo(() => runGovernance(repoInputs()), [])
   useReportHeight(embed)
+  const reportHeading = useRef<HTMLHeadingElement>(null)
 
   const { check, fix, implementation } = session
   const stale = isStale(session)
@@ -78,11 +80,15 @@ export function Playground() {
     }
   }, [check, governance])
 
-  const summaryText = check
-    ? stale
-      ? 'The design changed since the last check. Run the check again.'
-      : `Drift check finished: ${check.report.summary.MATCH} match, ${check.report.summary.DRIFT} drift, ${check.report.summary['NOT CHECKED']} not checked.`
-    : ''
+  const summary = check ? summarizeCounts(check.report.summary) : null
+  const summaryText = check ? (stale ? 'The design changed since the last check. Run the check again.' : summary!.announcement) : ''
+
+  // When a new check finishes, bring its report heading into view and move focus there.
+  useEffect(() => {
+    if (!check) return
+    const frame = requestAnimationFrame(() => { if (reportHeading.current) revealHeading(reportHeading.current, window) })
+    return () => cancelAnimationFrame(frame)
+  }, [check])
 
   return (
     <main className={`mx-auto flex max-w-(--layout-desktop-max-width) flex-col gap-stack-xl px-inset-lg tablet:px-inset-xl ${embed ? 'py-inset-lg' : 'py-section-sm'}`}>
@@ -125,6 +131,9 @@ export function Playground() {
         </div>
 
         <Button fullWidth size="lg" onClick={() => dispatch({ type: 'run' })}>Run Drift Check</Button>
+        {summary && !stale && (
+          <p data-testid="check-summary" className={`rounded-control p-inset-sm text-label-m ${summary.success ? 'bg-status-success-bg text-status-success-text' : 'bg-surface-secondary text-primary'}`}>{summary.text}</p>
+        )}
         <div className="flex flex-wrap items-center gap-inline-sm">
           {check && hasDrift(session) && !fix && (
             <Button variant="secondary" onClick={() => dispatch({ type: 'simulate' })}>Simulate fix</Button>
@@ -139,7 +148,7 @@ export function Playground() {
       {check && (
         <section aria-labelledby="report-heading" className="flex flex-col gap-stack-md">
           <div>
-            <h2 id="report-heading" className="text-title-m text-primary">Drift report</h2>
+            <h2 id="report-heading" ref={reportHeading} tabIndex={-1} className="text-title-m text-primary focus-visible:outline-2 focus-visible:outline-offset-4">Drift report</h2>
             <p className="mt-stack-xs text-body-m text-secondary">
               Real comparison engine · design: sanitized snapshot with your edits · implementation: the files listed above · {check.report.mode}
             </p>
