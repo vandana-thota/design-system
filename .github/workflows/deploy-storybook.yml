@@ -27,9 +27,11 @@ jobs:
       - run: npm ci
       - run: npm run tokens
       - run: npm run build-storybook
+      - run: npm run playground:build
+      - run: node scripts/playground/assemble-site.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: storybook-static
+          path: _site
 
   deploy:
     needs: build
