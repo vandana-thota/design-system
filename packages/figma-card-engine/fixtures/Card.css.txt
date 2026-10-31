@@ -1,0 +1,88 @@
+/* Resolved Version 1 Figma variables live in CSS, scoped to the card. */
+.card {
+  --sds-size-space-600: 24px;
+  --sds-size-space-400: 16px;
+  --sds-size-space-200: 8px;
+  --sds-size-radius-400: 16px;
+  --sds-size-radius-200: 8px;
+  --sds-color-text-default-default: #1e1e1e;
+  --sds-color-text-default-secondary: #757575;
+  --sds-color-text-default-tertiary: #b3b3b3;
+  --sds-color-background-positive-default: #14ae5c;
+  --sds-color-text-neutral-on-neutral: #f3f3f3;
+  --card-background: #fff;
+  --card-width: 360px;
+  --card-content-gap: 10px;
+  --card-font-family: 'Inter', sans-serif;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: var(--card-width);
+  max-width: 100%;
+  padding: var(--sds-size-space-600);
+  border-radius: var(--sds-size-radius-400);
+  background: var(--card-background);
+  overflow: clip;
+  font-family: var(--card-font-family);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--card-content-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.card__eyebrow,
+.card__title,
+.card__description { margin: 0; }
+
+/* Figma AUTO line heights resolve to 15, 19 and 17px in this design. */
+.card__eyebrow {
+  color: var(--sds-color-text-default-tertiary);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.card__title {
+  color: var(--sds-color-text-default-default);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+}
+
+.card__description {
+  width: 100%;
+  color: var(--sds-color-text-default-secondary);
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.card__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  border: 0;
+  border-radius: var(--sds-size-radius-200);
+  background: var(--sds-color-background-positive-default);
+  color: var(--sds-color-text-neutral-on-neutral);
+  font: 400 14px / 17px var(--card-font-family);
+  letter-spacing: 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.card__action:focus-visible {
+  outline: 2px solid var(--sds-color-text-default-default);
+  outline-offset: 3px;
+}
+
+.card__action:active { filter: brightness(0.95); }

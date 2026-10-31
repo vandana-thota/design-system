@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": 1,
+  "provider": "figma-mcp",
+  "sanitized": true,
+  "note": "Sanitized example of one Figma component for the public playground. Contains layout, spacing, radius and fill values only. Not a live Figma read.",
+  "fileKey": "sandbox-atlas-card",
+  "nodeId": "1:99",
+  "fetchedAt": "2026-10-31T09:38:05.209Z",
+  "document": {
+    "id": "1:99",
+    "type": "COMPONENT",
+    "name": "Card",
+    "visible": true,
+    "opacity": 1,
+    "layoutMode": "VERTICAL",
+    "primaryAxisAlignItems": "MIN",
+    "counterAxisAlignItems": "MIN",
+    "itemSpacing": 10,
+    "paddingTop": 24,
+    "paddingRight": 24,
+    "paddingBottom": 24,
+    "paddingLeft": 24,
+    "cornerRadius": 16,
+    "topLeftRadius": 16,
+    "topRightRadius": 16,
+    "bottomRightRadius": 16,
+    "bottomLeftRadius": 16,
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        }
+      }
+    ],
+    "children": [
+      {
+        "id": "1:63",
+        "type": "FRAME",
+        "name": "Content",
+        "visible": true,
+        "opacity": 1,
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "MIN",
+        "itemSpacing": 10,
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "cornerRadius": 0,
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "fills": [],
+        "children": [
+          {
+            "id": "1:38",
+            "type": "FRAME",
+            "name": "Eyebrow",
+            "visible": true,
+            "opacity": 1,
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "itemSpacing": 10,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "cornerRadius": 0,
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "fills": [],
+            "children": [
+              {
+                "id": "1:6",
+                "type": "TEXT",
+                "name": "Eyebrow text",
+                "visible": true,
+                "opacity": 1,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.7019608020782471,
+                      "g": 0.7019608020782471,
+                      "b": 0.7019608020782471
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "1:39",
+            "type": "FRAME",
+            "name": "Title",
+            "visible": true,
+            "opacity": 1,
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "itemSpacing": 10,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "cornerRadius": 0,
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "fills": [],
+            "children": [
+              {
+                "id": "1:13",
+                "type": "TEXT",
+                "name": "Title text",
+                "visible": true,
+                "opacity": 1,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.11764705926179886,
+                      "g": 0.11764705926179886,
+                      "b": 0.11764705926179886
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "1:40",
+            "type": "FRAME",
+            "name": "Description",
+            "visible": true,
+            "opacity": 1,
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "itemSpacing": 10,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "cornerRadius": 0,
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "fills": [],
+            "children": [
+              {
+                "id": "1:37",
+                "type": "TEXT",
+                "name": "Description text",
+                "visible": true,
+                "opacity": 1,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.4588235318660736,
+                      "g": 0.4588235318660736,
+                      "b": 0.4588235318660736
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "1:49",
+            "type": "FRAME",
+            "name": "Action",
+            "visible": true,
+            "opacity": 1,
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "itemSpacing": 10,
+            "paddingTop": 8,
+            "paddingRight": 16,
+            "paddingBottom": 8,
+            "paddingLeft": 16,
+            "cornerRadius": 8,
+            "topLeftRadius": 8,
+            "topRightRadius": 8,
+            "bottomRightRadius": 8,
+            "bottomLeftRadius": 8,
+            "fills": [
+              {
+                "type": "SOLID",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.0784313753247261,
+                  "g": 0.6823529601097107,
+                  "b": 0.3607843220233917
+                }
+              }
+            ],
+            "children": [
+              {
+                "id": "1:48",
+                "type": "TEXT",
+                "name": "Action label",
+                "visible": true,
+                "opacity": 1,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.9511187076568604,
+                      "g": 0.9511187076568604,
+                      "b": 0.9511187076568604
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

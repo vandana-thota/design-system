@@ -1,0 +1,29 @@
+import { useId, type MouseEventHandler } from 'react';
+import './Card.css';
+
+export interface CardProps {
+  eyebrow: string;
+  title: string;
+  description: string;
+  actionLabel: string;
+  onAction: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+}
+
+/** Version 1 card: Figma component 1:99. */
+export function Card({ eyebrow, title, description, actionLabel, onAction, className }: CardProps) {
+  const titleId = useId();
+
+  return (
+    <article className={['card', className].filter(Boolean).join(' ')} aria-labelledby={titleId}>
+      <div className="card__content">
+        <p className="card__eyebrow">{eyebrow}</p>
+        <h2 className="card__title" id={titleId}>{title}</h2>
+        <p className="card__description">{description}</p>
+        <button className="card__action" type="button" onClick={onAction}>
+          {actionLabel}
+        </button>
+      </div>
+    </article>
+  );
+}

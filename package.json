@@ -13,6 +13,7 @@
     "tokens": "style-dictionary build --config style-dictionary.config.mjs",
     "drift": "node scripts/drift/index.mjs",
     "drift:test": "node --test scripts/drift/drift.test.mjs",
+    "engine:test": "node --test packages/figma-card-engine/test/*.test.mjs",
     "predev": "npm run tokens",
     "prebuild": "npm run tokens",
     "prestorybook": "npm run tokens",
@@ -28,6 +29,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@babel/parser": "7.29.12",
     "@chromatic-com/storybook": "latest",
     "@storybook/addon-a11y": "^10.6.5",
     "@storybook/addon-docs": "^10.6.5",
@@ -42,6 +44,7 @@
     "@vitest/coverage-v8": "latest",
     "oxlint": "^1.89.0",
     "playwright": "latest",
+    "postcss": "8.5.32",
     "storybook": "^10.6.5",
     "style-dictionary": "^5.7.1",
     "typescript": "~7.0.2",
