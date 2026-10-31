@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" preserveAspectRatio="xMidYMid slice">
+  <!-- Original artwork for the drift playground: glass shapes on a pastel lavender studio backdrop. -->
+  <defs>
+    <linearGradient id="backdrop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F1ECFF"/>
+      <stop offset="0.55" stop-color="#E1E7FF"/>
+      <stop offset="1" stop-color="#EFE6FF"/>
+    </linearGradient>
+    <radialGradient id="studio-light" cx="0.18" cy="0.1" r="0.7">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glass-sphere" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="0.35" stop-color="#C5D3FF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#3559E8" stop-opacity="0.92"/>
+    </radialGradient>
+    <linearGradient id="iridescent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB8E6" stop-opacity="0.75"/>
+      <stop offset="0.5" stop-color="#9FE8FF" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#C9B8FF" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="ring-glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="0.45" stop-color="#8FA6FF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#3559E8" stop-opacity="0.95"/>
+    </linearGradient>
+    <radialGradient id="pearl" cx="0.35" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.6" stop-color="#D9E1FF"/>
+      <stop offset="1" stop-color="#9DB0FF"/>
+    </radialGradient>
+    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <rect width="320" height="96" fill="url(#backdrop)"/>
+  <rect width="320" height="96" fill="url(#studio-light)"/>
+
+  <!-- Soft contact shadows -->
+  <ellipse cx="110" cy="84" rx="30" ry="5" fill="#3559E8" opacity="0.2" filter="url(#soft-shadow)"/>
+  <ellipse cx="212" cy="86" rx="34" ry="5" fill="#3559E8" opacity="0.2" filter="url(#soft-shadow)"/>
+  <ellipse cx="276" cy="62" rx="16" ry="3" fill="#3559E8" opacity="0.15" filter="url(#soft-shadow)"/>
+
+  <!-- Glass cube -->
+  <g stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="1" stroke-linejoin="round">
+    <polygon points="110,24 132.6,37 110,50 87.4,37" fill="#EEF1FF" fill-opacity="0.92"/>
+    <polygon points="87.4,37 110,50 110,76 87.4,63" fill="#8FA6FF" fill-opacity="0.78"/>
+    <polygon points="110,50 132.6,37 132.6,63 110,76" fill="#3559E8" fill-opacity="0.82"/>
+    <polygon points="87.4,37 110,50 110,76 87.4,63" fill="url(#iridescent)" stroke="none"/>
+    <polygon points="110,24 132.6,37 110,50 87.4,37" fill="url(#iridescent)" fill-opacity="0.45" stroke="none"/>
+  </g>
+
+  <!-- Glass sphere -->
+  <circle cx="212" cy="52" r="30" fill="url(#glass-sphere)" stroke="#FFFFFF" stroke-opacity="0.6"/>
+  <ellipse cx="202" cy="38" rx="11" ry="6" fill="#FFFFFF" opacity="0.7" transform="rotate(-28 202 38)"/>
+  <path d="M190 66 C 202 78, 224 78, 236 64" fill="none" stroke="url(#iridescent)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Ring -->
+  <circle cx="276" cy="34" r="15" fill="none" stroke="url(#ring-glass)" stroke-width="6"/>
+  <circle cx="276" cy="34" r="15" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1" transform="translate(-1.5 -1.5)"/>
+
+  <!-- Pearls -->
+  <circle cx="58" cy="30" r="7" fill="url(#pearl)"/>
+  <circle cx="160" cy="24" r="5" fill="url(#pearl)"/>
+  <circle cx="40" cy="72" r="4" fill="url(#pearl)"/>
+  <circle cx="300" cy="78" r="6" fill="url(#pearl)"/>
+  <circle cx="56" cy="28" r="2" fill="#FFFFFF" opacity="0.9"/>
+</svg>

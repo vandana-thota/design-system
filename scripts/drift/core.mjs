@@ -84,8 +84,10 @@ const stripComments = (text, file) => {
   return /\.tsx?$/.test(file) ? noBlock.replace(/(^|[^:"'`\\])\/\/.*$/gm, (_, before) => before) : noBlock
 }
 
-// Generated token CSS and images are not hand-written source.
-export const isSource = (file) => !/(^|\/)(assets|styles\/tokens)(\/|$)/.test(file) && /\.(tsx?|css|mdx)$/.test(file)
+// Generated token CSS and images are not hand-written source. src/playground is the interactive demo built on
+// top of the design system, not part of it: counting it would let demo code make tokens look "used" and
+// change the system's own results.
+export const isSource = (file) => !/(^|\/)(assets|styles\/tokens)(\/|$)/.test(file) && !file.startsWith('src/playground/') && /\.(tsx?|css|mdx)$/.test(file)
 
 function prepareFiles(raw) {
   return raw

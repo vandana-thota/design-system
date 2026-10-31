@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Edit a design, run a real drift check, and see how design changes affect the React implementation." />
+    <title>Design-to-Code Drift Playground</title>
+    <script>
+      // Theme before first paint: ?theme=dark|light, else the saved theme, else light.
+      try {
+        var asked = new URLSearchParams(location.search).get('theme');
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        document.documentElement.dataset.theme = (asked || saved) === 'dark' ? 'dark' : 'light';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="../src/playground/main.tsx"></script>
+  </body>
+</html>

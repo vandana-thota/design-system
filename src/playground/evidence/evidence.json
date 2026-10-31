@@ -1,0 +1,318 @@
+{
+  "capturedAt": "2026-10-31T11:03:54.008Z",
+  "node": "v26.13.0",
+  "commit": "afd5f31",
+  "branch": "feature/interactive-drift-playground",
+  "runs": [
+    {
+      "id": "drift-cli",
+      "label": "Token governance checker (DS001–DS007)",
+      "command": "npm run drift",
+      "exitCode": 0,
+      "output": "DS001 dead-token (warning): 44\n  tokens/tokens.json  primitive.color.cobalt.200 is never used\n  tokens/tokens.json  primitive.space.0 is never used\n  tokens/tokens.json  primitive.space.250 is never used\n  tokens/tokens.json  primitive.space.400 is never used\n  tokens/tokens.json  primitive.space.800 is never used\n  tokens/tokens.json  primitive.space.1600 is never used\n  tokens/tokens.json  primitive.space.075 is never used\n  tokens/tokens.json  primitive.size.icon-lg is never used\n  tokens/tokens.json  primitive.size.target-min is never used\n  tokens/tokens.json  primitive.radius.0 is never used\n  tokens/tokens.json  semantic.color.accent.subtle-text is never used\n  tokens/tokens.json  semantic.color.status.info.bg is never used\n  tokens/tokens.json  semantic.color.status.info.text is never used\n  tokens/tokens.json  semantic.border-width.focus is never used\n  tokens/tokens.json  semantic.size.icon-lg is never used\n  ... and 29 more (run with --all to see them)\n\nDS002 duplicate-token (warning): 1\n  tokens/tokens.json  primitive.size.icon-lg and primitive.size.target-min have the same value (1.5rem)\n\nNote: DS001: 39 of 136 primitive tokens are unused (first 10 shown, --all for the rest).\n\nNote: DS002: 32 semantic tokens share a value with another semantic token (14 groups). Not listed, because alias names like inset-sm and stack-sm are often intentional.\n\n0 errors, 45 warnings, 28 allowed"
+    },
+    {
+      "id": "drift-tests",
+      "label": "Token governance tests",
+      "command": "npm run drift:test",
+      "exitCode": 0,
+      "tests": {
+        "total": 28,
+        "pass": 28,
+        "fail": 0,
+        "names": [
+          {
+            "ok": true,
+            "name": "a clean project has no findings and exits 0"
+          },
+          {
+            "ok": true,
+            "name": "DS001 dead token: DS001 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS002 duplicate primitive: DS002 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS003 hex color: DS003 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS003 px value: DS003 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS003 !important: DS003 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS004 primitive in component code: DS004 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS004 primitive in tokens.json: DS004 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS005 unknown variable: DS005 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS005 broken alias: DS005 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS006 name only in the spec: DS006 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS006 token only in tokens.json: DS006 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS007 component without story: DS007 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS007 story without component: DS007 reports it"
+          },
+          {
+            "ok": true,
+            "name": "DS003 allows bracket values made only of token variables"
+          },
+          {
+            "ok": true,
+            "name": "classes count as a use only when exactly one token owns them"
+          },
+          {
+            "ok": true,
+            "name": "allowlist: a reasoned entry allows a finding, a bad or stale entry is reported"
+          },
+          {
+            "ok": true,
+            "name": "allowlist: a token ending in * covers a group, and warns when it covers nothing"
+          },
+          {
+            "ok": true,
+            "name": "exit codes: warnings pass, --strict fails on warnings, errors fail"
+          },
+          {
+            "ok": true,
+            "name": "an unknown rule is an error"
+          },
+          {
+            "ok": true,
+            "name": "in-memory input gives exactly the same findings as reading the real project from disk"
+          },
+          {
+            "ok": true,
+            "name": "a planted hardcoded color is caught from memory alone (DS003)"
+          },
+          {
+            "ok": true,
+            "name": "editing an in-memory token reference to a primitive is caught (DS004)"
+          },
+          {
+            "ok": true,
+            "name": "the same input is not changed by the check, so a playground can re-run it"
+          },
+          {
+            "ok": true,
+            "name": "missing spec is reported as a finding, a missing generated tailwind.css is a hard error"
+          },
+          {
+            "ok": true,
+            "name": "in-memory allowlist works like the file one"
+          },
+          {
+            "ok": true,
+            "name": "the core and the rules import nothing from Node, so they can run in a browser"
+          },
+          {
+            "ok": true,
+            "name": "src/playground is demo scaffolding: files there are not governed and cannot make tokens look used"
+          }
+        ]
+      }
+    },
+    {
+      "id": "engine-tests",
+      "label": "Figma-card comparison engine tests",
+      "command": "npm run engine:test",
+      "exitCode": 0,
+      "tests": {
+        "total": 20,
+        "pass": 20,
+        "fail": 0,
+        "names": [
+          {
+            "ok": true,
+            "name": "sanitized snapshot matches 16 source checks; uninspected rendering stays NOT CHECKED"
+          },
+          {
+            "ok": true,
+            "name": "changing a CSS variable detects button color drift without changing source files"
+          },
+          {
+            "ok": true,
+            "name": "new Figma values, not mapping constants, drive expectations"
+          },
+          {
+            "ok": true,
+            "name": "normalizes equivalent hex and RGB colors"
+          },
+          {
+            "ok": true,
+            "name": "resolves nested fallback and inherited aliases with definition source locations"
+          },
+          {
+            "ok": true,
+            "name": "ancestor variable aliases resolve before child variable overrides"
+          },
+          {
+            "ok": true,
+            "name": "local override, declaration order, specificity and important are respected"
+          },
+          {
+            "ok": true,
+            "name": "expands padding and radius shorthand including individual corner override"
+          },
+          {
+            "ok": true,
+            "name": "missing/cyclic variables are never reported as matches"
+          },
+          {
+            "ok": true,
+            "name": "unsupported units, calc and malformed shorthands cannot produce partial matches"
+          },
+          {
+            "ok": true,
+            "name": "unsupported selectors, conditional CSS and CSS imports are conservative"
+          },
+          {
+            "ok": true,
+            "name": "logical overrides, unknown layout and parse failures do not produce matches"
+          },
+          {
+            "ok": true,
+            "name": "removed, reordered, added and reparented JSX elements cause structure drift"
+          },
+          {
+            "ok": true,
+            "name": "Figma additions/removals and text-wrapper changes cause structure drift"
+          },
+          {
+            "ok": true,
+            "name": "missing mapped selector is NOT CHECKED for style, DRIFT for static structure"
+          },
+          {
+            "ok": true,
+            "name": "dynamic children/classes, styles and spreads require runtime inspection"
+          },
+          {
+            "ok": true,
+            "name": "missing or unsupported Figma properties preserve actual code but never MATCH"
+          },
+          {
+            "ok": true,
+            "name": "REST corner representation is supported, without substituting missing properties"
+          },
+          {
+            "ok": true,
+            "name": "wrong identity, missing nodes and malformed evidence cannot claim a match"
+          },
+          {
+            "ok": true,
+            "name": "public snapshot is sanitized: allowlisted fields only, no private identifiers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "playground-tests",
+      "label": "Playground logic tests",
+      "command": "npm run playground:test",
+      "exitCode": 0,
+      "tests": {
+        "total": 18,
+        "pass": 18,
+        "fail": 0,
+        "names": [
+          {
+            "ok": true,
+            "name": "baseline: the design and the implementation match, and rendered appearance stays NOT CHECKED"
+          },
+          {
+            "ok": true,
+            "name": "the baseline implementation is blue #2563EB with a 12px radius and no illustration"
+          },
+          {
+            "ok": true,
+            "name": "color drift: purple and green are reported with the expected and actual colour"
+          },
+          {
+            "ok": true,
+            "name": "radius drift: 8px and 20px drift on all four corners, 12px matches"
+          },
+          {
+            "ok": true,
+            "name": "illustration drift: the design layer has no matching React element, named in plain words"
+          },
+          {
+            "ok": true,
+            "name": "several edits at once give one issue each, and the engine rows are left untouched by grouping"
+          },
+          {
+            "ok": true,
+            "name": "editing the design never changes the implementation, and old results are flagged stale"
+          },
+          {
+            "ok": true,
+            "name": "simulate fix: patches an in-memory copy, reruns the engine and resolves what it can"
+          },
+          {
+            "ok": true,
+            "name": "simulate fix can also remove an illustration the code has but the design does not"
+          },
+          {
+            "ok": true,
+            "name": "simulate fix never writes to disk: the source files are byte-for-byte unchanged"
+          },
+          {
+            "ok": true,
+            "name": "simulate fix does nothing when the results are stale or there is nothing to fix"
+          },
+          {
+            "ok": true,
+            "name": "reset returns to the blue, no-illustration, 12px baseline and clears findings and fixes"
+          },
+          {
+            "ok": true,
+            "name": "grouping does not hide NOT CHECKED: an unreadable stylesheet is reported, never matched"
+          },
+          {
+            "ok": true,
+            "name": "line diff marks added and removed lines"
+          },
+          {
+            "ok": true,
+            "name": "token governance runs on in-memory project files and agrees with the CLI-style disk run"
+          },
+          {
+            "ok": true,
+            "name": "the playground is demo scaffolding: it is not governed, so it cannot change the design system results"
+          },
+          {
+            "ok": true,
+            "name": "token lookup: the sandbox blue is not a design token, the brand cobalt is"
+          },
+          {
+            "ok": true,
+            "name": "the files bundled into the page give the same governance result as the CLI"
+          }
+        ]
+      }
+    }
+  ]
+}

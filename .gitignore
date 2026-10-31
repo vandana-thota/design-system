@@ -28,3 +28,4 @@ storybook-static
 
 # Drift checker report
 drift-report.json
+playground-dist

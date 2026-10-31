@@ -1,11 +1,11 @@
-import { mapping, checks } from './mapping.mjs';
+import { mapping as defaultMapping, checks as defaultChecks } from './mapping.mjs';
 import { inspectCss, normalizeColor, normalizeLength } from './css.mjs';
 import { inspectJsx, codeShape, figmaShape } from './jsx.mjs';
 import { validateEvidence } from './figma.mjs';
 
 const attempt = fn => { try { return { value: fn() }; } catch (e) { return { error: e.message }; } };
 const same = (a,b) => JSON.stringify(a) === JSON.stringify(b);
-const link = id => `${mapping.url.split('?')[0]}?node-id=${id.replace(':','-')}`;
+const link = (mapping, id) => `${mapping.url.split('?')[0]}?node-id=${id.replace(':','-')}`;
 
 function indexNodes(root) {
   const nodes = new Map();
@@ -38,8 +38,10 @@ function expectedValue(check, node) {
   return normalizeLength(value);
 }
 
-export function compare({ evidence, figmaError, css, jsx, mode = 'live' }) {
-  const validated = attempt(() => { if (figmaError) throw new Error(figmaError); return validateEvidence(evidence); });
+// `mapping` and `checks` default to the Version 1 Card. A caller can pass its own to compare another
+// component or a mapping with extra nodes (the playground maps an optional illustration layer).
+export function compare({ evidence, figmaError, css, jsx, mode = 'live', mapping = defaultMapping, checks = defaultChecks }) {
+  const validated = attempt(() => { if (figmaError) throw new Error(figmaError); return validateEvidence(evidence, mapping); });
   const indexed = validated.error ? validated : attempt(()=>indexNodes(evidence.document));
   const parsedJsx = attempt(()=>inspectJsx(jsx, mapping));
   const parsedCss = attempt(()=>inspectCss(css, mapping.cssFile));
@@ -64,7 +66,7 @@ export function compare({ evidence, figmaError, css, jsx, mode = 'live' }) {
       property: check.label,
       status: expected.error || actual.error ? 'NOT CHECKED' : same(expected.value,actual.value) ? 'MATCH' : 'DRIFT',
       expected: expected.value ?? null, actual: actual.value ?? null,
-      figmaSource: `${link(check.nodeId)} [${check.nodeId}.${check.figma}]`,
+      figmaSource: `${link(mapping, check.nodeId)} [${check.nodeId}.${check.figma}]`,
       codeSources: cssDetail?.sources ?? [`${mapping.cssFile} [${selector} → ${check.css}; no resolved declaration]`],
       rawCss: cssDetail?.raw ?? null,
       reason: [expected.error && `Figma: ${expected.error}`, actual.error && `Code: ${actual.error}`].filter(Boolean).join('; ') || 'Compared inspected normalized values',
@@ -76,7 +78,7 @@ export function compare({ evidence, figmaError, css, jsx, mode = 'live' }) {
     property: 'Component structure',
     status: expected.error || actual.error ? 'NOT CHECKED' : same(expected.value,actual.value) ? 'MATCH' : 'DRIFT',
     expected: expected.value ?? null, actual: actual.value ?? null,
-    figmaSource: `${link(mapping.nodeId)} [children; explicit text-wrapper mapping in drift/mapping.mjs]`,
+    figmaSource: `${link(mapping, mapping.nodeId)} [children; explicit text-wrapper mapping in packages/figma-card-engine/src/mapping.mjs]`,
     codeSources: parsedJsx.value?.elements.map(n=>n.source) ?? [mapping.jsxFile],
     reason: [expected.error,actual.error].filter(Boolean).join('; ') || 'Compared mapped tag/class hierarchy, child order and text slots (not text copy)',
   });

@@ -1,0 +1,94 @@
+/*
+ * Sandbox implementation of the Atlas insight card (used only by the drift playground).
+ *
+ * The drift engine reads this file as plain CSS, so the values it compares (radius, padding, gap and
+ * the button colour) are written out here as literals. Everything the engine does not compare uses the
+ * design-system tokens (component, semantic and type tokens).
+ *
+ * The playground applies this exact text with a <style> element, and the engine analyses the same text.
+ */
+.atlas-card {
+  --atlas-radius: 12px;
+  --atlas-padding: 24px;
+  --atlas-gap: 10px;
+  --atlas-action-bg: #2563EB;
+  --atlas-action-text: #FFFFFF;
+  --atlas-action-padding-y: 8px;
+  --atlas-action-padding-x: 16px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--atlas-gap);
+  width: 100%;
+  max-width: 360px;
+  padding: var(--atlas-padding);
+  border: var(--border-width-default) solid var(--card-border);
+  border-radius: var(--atlas-radius);
+  background: var(--card-bg);
+  overflow: clip;
+}
+
+.atlas-card__illustration {
+  height: 96px;
+  border-radius: var(--radius-control);
+  background-image: var(--card-illustration);
+  background-position: center;
+  background-size: cover;
+}
+
+.atlas-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--atlas-gap);
+  min-width: 0;
+}
+
+.atlas-card__eyebrow,
+.atlas-card__title,
+.atlas-card__description { margin: 0; }
+
+.atlas-card__eyebrow {
+  color: var(--card-body-text);
+  font-family: var(--type-label-s-font-family);
+  font-size: var(--type-label-s-font-size);
+  font-weight: var(--type-label-s-font-weight);
+  line-height: var(--type-label-s-line-height);
+  letter-spacing: 0.04em;
+}
+
+.atlas-card__title {
+  color: var(--card-title-text);
+  font-family: var(--type-title-m-font-family);
+  font-size: var(--type-title-m-font-size);
+  font-weight: var(--type-title-m-font-weight);
+  line-height: var(--type-title-m-line-height);
+}
+
+.atlas-card__description {
+  color: var(--card-body-text);
+  font-family: var(--type-body-m-font-family);
+  font-size: var(--type-body-m-font-size);
+  font-weight: var(--type-body-m-font-weight);
+  line-height: var(--type-body-m-line-height);
+}
+
+.atlas-card__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--atlas-action-padding-y) var(--atlas-action-padding-x);
+  border: 0;
+  border-radius: var(--button-radius);
+  background-color: var(--atlas-action-bg);
+  color: var(--atlas-action-text);
+  font-family: var(--type-label-m-font-family);
+  font-size: var(--type-label-m-font-size);
+  font-weight: var(--type-label-m-font-weight);
+  line-height: var(--type-label-m-line-height);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.atlas-card__action:hover { opacity: 0.92; }

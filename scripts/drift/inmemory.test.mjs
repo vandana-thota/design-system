@@ -81,3 +81,10 @@ test('the core and the rules import nothing from Node, so they can run in a brow
     assert.doesNotMatch(source, /\b(fs|path|process)\./, `${name} must not use fs, path or process`)
   }
 })
+
+test('src/playground is demo scaffolding: files there are not governed and cannot make tokens look used', () => {
+  const demo = { file: 'src/playground/Demo.tsx', text: 'export const Demo = () => <p className="bg-(--button-bg)" />\n' }
+  const base = checkInputs(inputs(), { rule: 'DS001' })
+  const withDemo = checkInputs(inputs({ files: [...inputs().files, demo] }), { rule: 'DS001' })
+  assert.deepEqual(withDemo.findings, base.findings)
+})
