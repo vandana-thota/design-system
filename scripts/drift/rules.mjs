@@ -1,8 +1,6 @@
 // The drift rules. Each rule is { id, name, severity, run(ctx) } and returns a list of
 // { file, line?, token?, message, quiet? }. `quiet` findings are counted and saved to the JSON
 // but hidden in the terminal unless you pass --all.
-import fs from 'node:fs'
-import path from 'node:path'
 
 const TOKENS = 'tokens/tokens.json'
 const SPEC = 'docs/tokens-spec.md'
@@ -154,8 +152,7 @@ export const rules = [
   {
     id: 'DS006', name: 'spec-drift', severity: 'error',
     run(ctx) {
-      const file = path.join(ctx.opts.root, SPEC)
-      if (!fs.existsSync(file)) return [{ file: SPEC, message: `${SPEC} not found` }]
+      if (ctx.inputs.spec == null) return [{ file: SPEC, message: `${SPEC} not found` }]
       // The spec spells names several ways (sand-0, color.bg.surface, inset-xs), so a token matches under either spelling.
       const known = new Map()
       for (const t of ctx.tokens) {
@@ -163,7 +160,7 @@ export const rules = [
       }
       const matched = new Set()
       const out = []
-      for (const s of parseSpec(fs.readFileSync(file, 'utf8'))) {
+      for (const s of parseSpec(ctx.inputs.spec)) {
         const t = known.get(`${s.layer}:${s.name}`)
         if (t) matched.add(t.path)
         else out.push({ file: SPEC, line: s.line, message: `${s.name} (${s.layer}) is in the spec but not in tokens.json` })

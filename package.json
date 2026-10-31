@@ -12,7 +12,7 @@
     "build-storybook": "storybook build",
     "tokens": "style-dictionary build --config style-dictionary.config.mjs",
     "drift": "node scripts/drift/index.mjs",
-    "drift:test": "node --test scripts/drift/drift.test.mjs",
+    "drift:test": "node --test scripts/drift/drift.test.mjs scripts/drift/inmemory.test.mjs",
     "engine:test": "node --test packages/figma-card-engine/test/*.test.mjs",
     "predev": "npm run tokens",
     "prebuild": "npm run tokens",
